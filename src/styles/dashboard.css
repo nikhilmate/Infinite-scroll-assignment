@@ -1,0 +1,179 @@
+.section__dashboard {
+    min-height: 100vh;
+    background-color: #FFF;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 2px solid #d7d7d7;
+}
+
+.db-title {
+    font-size: 30px;
+    line-height: 1;
+    color: #17628a;
+    font-weight: 400;
+}
+
+.logout-btn {
+    width: auto;
+    font-size: 18px;
+    padding: 8px 24px;
+    height: 44px;
+    border-radius: 4px;
+}
+
+.logout-btn:hover {
+    background-color: #f26a21;
+}
+
+.people-list-wrap {
+    max-height: calc(100vh - 86px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.people-list {
+    list-style: none;
+}
+
+.list-item {
+    display: block;
+    padding: 0 30px;
+    margin: 0;
+}
+
+.item-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.item-icon {
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    border-radius: 4px;
+    background-color: #fbfaf9;
+}
+
+.item-icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.item-desc {
+    width: calc(100% - 80px);
+    margin-right: 20px;
+}
+
+.item-para {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.item-name {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #17628a;
+}
+
+.item-gender {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: #FFF;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.gender-male {
+    background-color: #f26a21;
+}
+
+.gender-female {
+    background-color: #88178a;
+}
+
+.item-dob {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #f26a21;
+}
+
+
+.wrap__form-loader {
+    padding: 20px;
+}
+.loader-shield {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loader-shield svg {
+    width: 60px;
+    height: 60px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .dashboard-header {
+        padding: 12px 20px;
+    }
+
+    .db-title {
+        font-size: 24px;
+    }
+
+    .logout-btn {
+        font-size: 16px;
+        height: 36px;
+        padding: 5px 18px;
+    }
+
+    .list-item {
+        padding: 0 20px;
+    }
+
+    .item-inner {
+        padding: 15px 0;
+    }
+
+    .item-name {
+        font-size: 17px;
+    }
+
+    .item-dob {
+        font-size: 12px;
+    }
+    .item-gender {
+        width: 17px;
+        height: 17px;
+        font-size: 11px;
+    }
+
+    .item-icon {
+        width: 52px;
+        height: 52px;
+    }
+}

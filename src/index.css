@@ -1,0 +1,8 @@
+@import './styles/app.css';
+@import './styles/apploader.css';
+
+/* onboard */
+@import './styles/login.css';
+
+/* dashboard */
+@import './styles/dashboard.css';
