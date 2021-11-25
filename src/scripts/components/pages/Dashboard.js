@@ -8,28 +8,31 @@ const female = process.env.PUBLIC_URL + '/images/female.png'
 const Dashboard = () => {
     const _url = 'https://randomuser.me/api/?results=20&inc=gender,name,dob,picture'
     const _payload = { method: 'GET', headers: { Accept: 'application/json' }}
+    
     const state = useContext(AppContext)
+    
     const [loaderState, setLoaderState] = useState(true)
     const [list, setList] = useState([])
+    const [firstTimeFetch, setFirstTimeFetch] = useState(false)
+    
     const observer = useRef()
     const scrollDownRef = useRef(null)
-    const [firstTimeFetch, setFirstTimeFetch] = useState(false)
+
+    let delayInCb = null;
 
     const scrollToBottom = () => {
-        if (scrollDownRef.current && scrollDownRef.current.hasOwnProperty('scrollIntoView'))
-            console.log('scroll')
-            scrollDownRef.current.scrollIntoView({behavior: "smooth", block: "end"})
+        if (scrollDownRef.current.hasOwnProperty('scrollIntoView'))
+        console.log('scroll')
+        scrollDownRef.current.scrollIntoView({ behavior: "smooth", block: "end" })
     }
 
-    let timer = null;
-
     useEffect(() => {
+        if(loaderState) scrollToBottom()
         if (!firstTimeFetch) {
             setFirstTimeFetch(true)
             fetchPeople()
         }
-        if(loaderState) scrollToBottom()
-    }, [loaderState, firstTimeFetch])
+    }, [loaderState, firstTimeFetch])   
 
     const lastItemRef = React.useCallback(
         (node) => {
@@ -38,8 +41,8 @@ const Dashboard = () => {
         
             observer.current = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting) {
-                    if (!timer) clearTimeout(timer)
-                    timer = setTimeout(() => {
+                    if (!delayInCb) clearTimeout(delayInCb)
+                    delayInCb = setTimeout(() => {
                         fetchPeople()
                     }, 1000);
                 }

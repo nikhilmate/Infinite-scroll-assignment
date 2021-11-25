@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import AppContext from '../../store/AppContext'
 import { preventSubmit } from '../../utils/dom.utils'
 
-const EmailForm = (props) => {
+const EmailForm = () => {
     const { contextReducer } = useContext(AppContext)
     const [emailID, setEmailID] = useState('')
     const [password, setPassword] = useState('')
