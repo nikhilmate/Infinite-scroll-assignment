@@ -21,9 +21,7 @@ const Dashboard = () => {
     let delayInCb = null;
 
     const scrollToBottom = () => {
-        if (scrollDownRef.current.hasOwnProperty('scrollIntoView'))
-        console.log('scroll')
-        scrollDownRef.current.scrollIntoView({ behavior: "smooth", block: "end" })
+        scrollDownRef?.current?.scrollIntoView({ behavior: "smooth", block: "end" })
     }
 
     useEffect(() => {
