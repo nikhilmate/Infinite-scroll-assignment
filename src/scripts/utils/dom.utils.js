@@ -7,6 +7,8 @@ export const initialState = {
     loading: true
 };
 
+export const R_PREFIX = 'Infinite-scroll-assignment'
+
 export const preventSubmit = _ev => _ev.preventDefault()
 
 export const getLocaleString = (date) => {
@@ -15,5 +17,5 @@ export const getLocaleString = (date) => {
         let localeStr = dateinstance.toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })
         return localeStr
     }
-    return '';
+    return ''
 }
