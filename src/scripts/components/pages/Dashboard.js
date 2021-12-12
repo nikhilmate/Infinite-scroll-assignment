@@ -17,37 +17,37 @@ const Dashboard = () => {
     const [showError, setError] = useState(false)
     
     const observer = useRef()
-    const scrollDownRef = useRef(null)
+    // const scrollDownRef = useRef(null)
 
     let delayInCb = null;
 
-    const scrollToBottom = () => {
-        scrollDownRef?.current?.scrollIntoView({ behavior: "smooth", block: "end" })
-    }
+    // const scrollToBottom = () => {
+    //     scrollDownRef?.current?.scrollIntoView({ behavior: "smooth", block: "end" })
+    // }
 
     useEffect(() => {
-        if(loaderState) scrollToBottom()
+        // if(loaderState) scrollToBottom()
         if (shouldFetch && !showError) {
             fetchPeople()
         }
-    }, [loaderState, shouldFetch, showError])   
+    }, [/*loaderState,*/ shouldFetch, showError])   
 
     const lastItemRef = React.useCallback(
         (node) => {
-            if (loaderState) return;
-            if (observer.current) observer.current.disconnect();
+            if (loaderState) return
+            if (observer.current) observer.current.disconnect()
         
             observer.current = new IntersectionObserver(([entry]) => {
                 if (entry.isIntersecting) {
-                    if (entry.intersectionRatio >= 1) {
+                    if (entry.intersectionRatio >= 0.1) {
                         setShouldFetch(true)
                     } else {
                         setShouldFetch(false)
                     }
                 }
-            }, {delay: 1000, threshold: 1});
+            }, {delay: 1000, threshold: 0})
         
-            if (node) observer.current.observe(node);
+            if (node) observer.current.observe(node)
         },
         [loaderState]
     );
@@ -112,8 +112,9 @@ const Dashboard = () => {
                             </div>
                         }
                         {
+                            // ref={scrollDownRef}
                             loaderState &&
-                            <div className="wrap__form-loader" ref={scrollDownRef}>
+                            <div className="wrap__form-loader">
                                 <div className="loader-shield">
                                     <LoaderIcon className={'dl-blk'} />
                                 </div>
@@ -128,9 +129,9 @@ const Dashboard = () => {
 
 const Item = ({ children, reference }) => {
     return (
-        <div ref={reference}>
+        <li ref={reference} className="list-item">
             {children}
-        </div>
+        </li>
     );
 };
 
@@ -142,7 +143,6 @@ const ItemUi = ({ item }) => {
         dob = getLocaleString(item.dob.date),
         imgSrc = item.picture.medium ? item.picture.medium : isfemale ? female : male
     return (
-    <li className="list-item">
         <div className="item-inner">
             <div className="item-desc">
                 <p className="item-para">
@@ -155,7 +155,6 @@ const ItemUi = ({ item }) => {
                 <img src={imgSrc} />
             </span>
         </div>
-    </li>
     )
 }
 
