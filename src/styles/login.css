@@ -1,0 +1,143 @@
+.section__onboarding {
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comn-onboard-box {
+    background-color: #FFF;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 0 6px -1px #bbb;
+    position: relative;
+    z-index: 2;
+}
+
+.wrap__onboard-form {
+    max-width: 440px;
+    overflow: hidden;
+    padding: 30px 20px;
+    position: relative;
+    background-color: #FFF;
+}
+
+.wrap__onboard-form .main-title {
+    font-size: 30px;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #17628a;
+    font-weight: 300;
+    display: block;
+}
+
+.h1_sign-text {
+    font-family: var(--main-font);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    font-size: 28px;
+    line-height: 0.8;
+    color: #f2300b;
+    display: block;
+    text-align: center;
+}
+
+.wrap__sign-in-box {
+    max-width: 340px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.form__sign-in,
+.wrap__input-field,
+.wrap__submit-field,
+.wrap__input-field input,
+.wrap__submit-field button {
+    width: 100%;
+}
+
+.input__email-form {
+    font-family: var(--main-font);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    height: 50px;
+    color: #236e96;
+    background-color: #f5f3f4;
+    border-radius: 4px;
+    transition: all .3s ease;
+    padding: 8px 20px;
+    text-align: center;
+}
+
+.input__email-form:focus,
+.input__email-form:hover {
+    background-color: #f9f9f9;
+}
+
+.input__email-form::placeholder {
+    color: rgba(23, 98, 138, 0.6);
+}
+
+.input__email-form.input__error-show {
+    
+    border-bottom: 2px solid rgba(243, 114, 44, 0.6);
+}
+
+.btn__sign-form {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    margin: 0 auto;
+    background-color: #f3722c;
+    height: 50px;
+    border-radius: 4px;
+    transition: all .3s ease;
+    padding: 8px 20px;
+}
+
+.wrap__submit-field {
+    position: relative;
+    margin-top: 20px;
+}
+
+.btn__sign-form:hover {
+    background-color: #f26a21;
+}
+
+@media screen and (max-width: 480px) {
+    .section__onboard-form {
+        padding: 30px 15px;
+    }
+
+    .wrap__sign-in-box {
+        max-width: 300px;
+    }
+
+    .wrap__onboard-form {
+        padding: 25px 15px;
+    }
+
+    .wrap__sign-in-box {
+        padding-top: 30px;
+    }
+
+    .wrap__onboard-form .main-title,
+    .h1_sign-text {
+        font-size: 22px;
+    }
+
+    .h1_sign-text {
+        font-size: 20px;
+    }
+
+    .input__email-form,
+    .btn__sign-form {
+        font-size: 17px;
+        height: 48px;
+    }
+}
