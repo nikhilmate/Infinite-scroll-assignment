@@ -13,7 +13,8 @@ const Dashboard = () => {
     
     const [loaderState, setLoaderState] = useState(true)
     const [list, setList] = useState([])
-    const [firstTimeFetch, setFirstTimeFetch] = useState(false)
+    const [shouldFetch, setShouldFetch] = useState(true)
+    const [showError, setError] = useState(false)
     
     const observer = useRef()
     const scrollDownRef = useRef(null)
@@ -26,25 +27,25 @@ const Dashboard = () => {
 
     useEffect(() => {
         if(loaderState) scrollToBottom()
-        if (!firstTimeFetch) {
-            setFirstTimeFetch(true)
+        if (shouldFetch && !showError) {
             fetchPeople()
         }
-    }, [loaderState, firstTimeFetch])   
+    }, [loaderState, shouldFetch, showError])   
 
     const lastItemRef = React.useCallback(
         (node) => {
             if (loaderState) return;
             if (observer.current) observer.current.disconnect();
         
-            observer.current = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    if (!delayInCb) clearTimeout(delayInCb)
-                    delayInCb = setTimeout(() => {
-                        fetchPeople()
-                    }, 1000);
+            observer.current = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) {
+                    if (entry.intersectionRatio >= 1) {
+                        setShouldFetch(true)
+                    } else {
+                        setShouldFetch(false)
+                    }
                 }
-            });
+            }, {delay: 1000, threshold: 1});
         
             if (node) observer.current.observe(node);
         },
@@ -55,7 +56,13 @@ const Dashboard = () => {
         state.contextReducer({ type: 'signOut' })
     }
 
+    const loadMoreHandler = (ev) => {
+        setError(false)
+        fetchPeople()
+    }
+
     const fetchPeople = () => {
+        setShouldFetch(false)
         setLoaderState(true)
         fetch(_url, _payload)
             .then(response => response.json())
@@ -69,6 +76,7 @@ const Dashboard = () => {
             })
             .catch(error => {
                 setLoaderState(false)
+                setError(true)
             })
     }
     
@@ -82,18 +90,27 @@ const Dashboard = () => {
                     </header>
                     <section className="people-list-wrap">
                         <ul  className="people-list">
-                            {list.map((item, index) =>
-                                index + 1 === list.length ? (
-                                <Item reference={lastItemRef} key={index}>
-                                    <ItemUi item={item} />
-                                </Item>
-                                ) : (
-                                <Item key={index}>
-                                    <ItemUi item={item} />
-                                </Item>
+                            {
+                                list.map((item, index) =>
+                                    index + 1 === list.length ? (
+                                    <Item reference={lastItemRef} key={index}>
+                                        <ItemUi item={item} />
+                                    </Item>
+                                    ) : (
+                                    <Item key={index}>
+                                        <ItemUi item={item} />
+                                    </Item>
+                                    )
                                 )
-                            )}
+                            }
                         </ul>
+                        {
+                            showError &&
+                            <div className="wrap__loader-more">
+                                <p className="load-error-para">Failed to load data. Please try again.</p>
+                                <button className="btn_comn-style btn__load-more" onClick={loadMoreHandler}>Load More</button>
+                            </div>
+                        }
                         {
                             loaderState &&
                             <div className="wrap__form-loader" ref={scrollDownRef}>

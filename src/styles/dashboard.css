@@ -136,6 +136,29 @@
 }
 
 
+.wrap__loader-more {
+    padding: 20px;
+}
+
+.load-error-para {
+    display: inline;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #17628a;
+}
+
+.btn__load-more {
+    margin: 10px 0 0;
+    width: auto;
+    font-size: 16px;
+    padding: 8px 20px;
+    height: 36px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 @media screen and (max-width: 600px) {
     .dashboard-header {
         padding: 12px 20px;
